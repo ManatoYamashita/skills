@@ -1,0 +1,168 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/pr-review-e2e/prediction.schema.json",
+  "title": "PR review blind corpus prediction",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "corpus_version",
+    "run_id",
+    "reviewer",
+    "cases"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "integer",
+      "const": 1
+    },
+    "corpus_version": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+    "run_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "reviewer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "model", "version"],
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "model": { "type": "string", "minLength": 1 },
+        "version": { "type": "string", "minLength": 1 }
+      }
+    },
+    "cases": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "case_id",
+          "base_sha",
+          "head_sha",
+          "coverage_status",
+          "findings"
+        ],
+        "properties": {
+          "case_id": {
+            "type": "string",
+            "pattern": "^C-[A-Z0-9]{8}$"
+          },
+          "base_sha": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{40}$"
+          },
+          "head_sha": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{40}$"
+          },
+          "coverage_status": {
+            "type": "string",
+            "enum": ["complete", "partial", "blocked"]
+          },
+          "findings": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "prediction_id",
+                "verdict",
+                "severity",
+                "confidence",
+                "issue_code",
+                "category",
+                "path",
+                "side",
+                "line",
+                "claim"
+              ],
+              "properties": {
+                "prediction_id": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "verdict": {
+                  "type": "string",
+                  "enum": ["KEEP", "DOWNGRADE", "REJECT", "REVIEW"]
+                },
+                "severity": {
+                  "type": "string",
+                  "enum": ["High", "Middle", "Low", "Nit"]
+                },
+                "confidence": {
+                  "type": "string",
+                  "enum": ["high", "medium", "low"]
+                },
+                "issue_code": {
+                  "type": "string",
+                  "enum": [
+                    "TENANT_GUARD_REMOVED",
+                    "UNSCOPED_DESTRUCTIVE_DELETE",
+                    "NON_NULL_COLUMN_WITHOUT_BACKFILL",
+                    "PUBLIC_RESPONSE_FIELD_REMOVED",
+                    "OBJECT_AUTHORIZATION_BYPASS",
+                    "WEBHOOK_NOT_IDEMPOTENT",
+                    "WRITE_FAILURE_REPORTED_AS_SUCCESS",
+                    "LOST_UPDATE_RACE",
+                    "PARTIAL_WRITE_WITHOUT_TRANSACTION",
+                    "LOCAL_TIME_IN_UTC_CONTRACT",
+                    "UPSTREAM_TIMEOUT_REMOVED",
+                    "PAGE_SIZE_LIMIT_REMOVED",
+                    "INPUT_VALIDATION_REMOVED",
+                    "AUTHENTICATION_BYPASS",
+                    "SECRET_EXPOSURE",
+                    "QUERY_INJECTION",
+                    "CACHE_INVALIDATION_MISSING",
+                    "UNBOUNDED_RETRY",
+                    "RESOURCE_LEAK",
+                    "TEST_FALSE_SUCCESS",
+                    "OBSERVABILITY_REGRESSION",
+                    "NULL_HANDLING_REGRESSION",
+                    "OTHER"
+                  ]
+                },
+                "category": {
+                  "type": "string",
+                  "enum": [
+                    "security",
+                    "data-integrity",
+                    "migration",
+                    "compatibility",
+                    "idempotency",
+                    "error-handling",
+                    "concurrency",
+                    "correctness",
+                    "operations",
+                    "performance",
+                    "testing",
+                    "other"
+                  ]
+                },
+                "path": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "side": {
+                  "type": "string",
+                  "enum": ["LEFT", "RIGHT"]
+                },
+                "line": {
+                  "type": "integer",
+                  "minimum": 1
+                },
+                "claim": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

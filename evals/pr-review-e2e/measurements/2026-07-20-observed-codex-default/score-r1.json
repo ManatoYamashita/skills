@@ -1,0 +1,460 @@
+{
+  "blind": true,
+  "case_results": [
+    {
+      "actionable_prediction_count": 1,
+      "case_id": "C-1B8E4A70",
+      "case_kind": "regression",
+      "coverage_status": "complete",
+      "duplicate_prediction_ids": [],
+      "false_positive_prediction_ids": [],
+      "localization_error_prediction_ids": [],
+      "missed_truth_ids": [],
+      "strict_matches": [
+        {
+          "prediction_id": "P-C-1B8E4A70-1",
+          "severity_correct": true,
+          "truth_id": "TRUTH-002"
+        }
+      ],
+      "truth_count": 1
+    },
+    {
+      "actionable_prediction_count": 1,
+      "case_id": "C-1E7C4A96",
+      "case_kind": "regression",
+      "coverage_status": "complete",
+      "duplicate_prediction_ids": [],
+      "false_positive_prediction_ids": [],
+      "localization_error_prediction_ids": [],
+      "missed_truth_ids": [],
+      "strict_matches": [
+        {
+          "prediction_id": "P-C-1E7C4A96-1",
+          "severity_correct": true,
+          "truth_id": "TRUTH-010"
+        }
+      ],
+      "truth_count": 1
+    },
+    {
+      "actionable_prediction_count": 0,
+      "case_id": "C-2A9B5D83",
+      "case_kind": "no-finding",
+      "coverage_status": "complete",
+      "duplicate_prediction_ids": [],
+      "false_positive_prediction_ids": [],
+      "localization_error_prediction_ids": [],
+      "missed_truth_ids": [],
+      "strict_matches": [],
+      "truth_count": 0
+    },
+    {
+      "actionable_prediction_count": 1,
+      "case_id": "C-2D5F8C61",
+      "case_kind": "regression",
+      "coverage_status": "complete",
+      "duplicate_prediction_ids": [],
+      "false_positive_prediction_ids": [],
+      "localization_error_prediction_ids": [],
+      "missed_truth_ids": [],
+      "strict_matches": [
+        {
+          "prediction_id": "P-C-2D5F8C61-1",
+          "severity_correct": true,
+          "truth_id": "TRUTH-005"
+        }
+      ],
+      "truth_count": 1
+    },
+    {
+      "actionable_prediction_count": 1,
+      "case_id": "C-3C6E1A85",
+      "case_kind": "regression",
+      "coverage_status": "complete",
+      "duplicate_prediction_ids": [],
+      "false_positive_prediction_ids": [],
+      "localization_error_prediction_ids": [],
+      "missed_truth_ids": [],
+      "strict_matches": [
+        {
+          "prediction_id": "P-C-3C6E1A85-1",
+          "severity_correct": true,
+          "truth_id": "TRUTH-008"
+        }
+      ],
+      "truth_count": 1
+    },
+    {
+      "actionable_prediction_count": 1,
+      "case_id": "C-4E7A1B93",
+      "case_kind": "regression",
+      "coverage_status": "complete",
+      "duplicate_prediction_ids": [],
+      "false_positive_prediction_ids": [],
+      "localization_error_prediction_ids": [],
+      "missed_truth_ids": [],
+      "strict_matches": [
+        {
+          "prediction_id": "P-C-4E7A1B93-1",
+          "severity_correct": true,
+          "truth_id": "TRUTH-004"
+        }
+      ],
+      "truth_count": 1
+    },
+    {
+      "actionable_prediction_count": 1,
+      "case_id": "C-4F8E6C72",
+      "case_kind": "regression",
+      "coverage_status": "complete",
+      "duplicate_prediction_ids": [],
+      "false_positive_prediction_ids": [],
+      "localization_error_prediction_ids": [],
+      "missed_truth_ids": [],
+      "strict_matches": [
+        {
+          "prediction_id": "P-C-4F8E6C72-1",
+          "severity_correct": true,
+          "truth_id": "TRUTH-012"
+        }
+      ],
+      "truth_count": 1
+    },
+    {
+      "actionable_prediction_count": 0,
+      "case_id": "C-5C3A8B17",
+      "case_kind": "no-finding",
+      "coverage_status": "complete",
+      "duplicate_prediction_ids": [],
+      "false_positive_prediction_ids": [],
+      "localization_error_prediction_ids": [],
+      "missed_truth_ids": [],
+      "strict_matches": [],
+      "truth_count": 0
+    },
+    {
+      "actionable_prediction_count": 1,
+      "case_id": "C-5F9B2D74",
+      "case_kind": "regression",
+      "coverage_status": "complete",
+      "duplicate_prediction_ids": [],
+      "false_positive_prediction_ids": [],
+      "localization_error_prediction_ids": [],
+      "missed_truth_ids": [],
+      "strict_matches": [
+        {
+          "prediction_id": "P-C-5F9B2D74-1",
+          "severity_correct": true,
+          "truth_id": "TRUTH-007"
+        }
+      ],
+      "truth_count": 1
+    },
+    {
+      "actionable_prediction_count": 1,
+      "case_id": "C-6B2D9F30",
+      "case_kind": "regression",
+      "coverage_status": "complete",
+      "duplicate_prediction_ids": [],
+      "false_positive_prediction_ids": [],
+      "localization_error_prediction_ids": [],
+      "missed_truth_ids": [],
+      "strict_matches": [
+        {
+          "prediction_id": "P-C-6B2D9F30-1",
+          "severity_correct": false,
+          "truth_id": "TRUTH-009"
+        }
+      ],
+      "truth_count": 1
+    },
+    {
+      "actionable_prediction_count": 0,
+      "case_id": "C-7D1F4E60",
+      "case_kind": "no-finding",
+      "coverage_status": "complete",
+      "duplicate_prediction_ids": [],
+      "false_positive_prediction_ids": [],
+      "localization_error_prediction_ids": [],
+      "missed_truth_ids": [],
+      "strict_matches": [],
+      "truth_count": 0
+    },
+    {
+      "actionable_prediction_count": 1,
+      "case_id": "C-7F3A9D2C",
+      "case_kind": "regression",
+      "coverage_status": "complete",
+      "duplicate_prediction_ids": [],
+      "false_positive_prediction_ids": [],
+      "localization_error_prediction_ids": [],
+      "missed_truth_ids": [],
+      "strict_matches": [
+        {
+          "prediction_id": "P-C-7F3A9D2C-1",
+          "severity_correct": true,
+          "truth_id": "TRUTH-001"
+        }
+      ],
+      "truth_count": 1
+    },
+    {
+      "actionable_prediction_count": 1,
+      "case_id": "C-8A1C7E42",
+      "case_kind": "regression",
+      "coverage_status": "complete",
+      "duplicate_prediction_ids": [],
+      "false_positive_prediction_ids": [],
+      "localization_error_prediction_ids": [],
+      "missed_truth_ids": [],
+      "strict_matches": [
+        {
+          "prediction_id": "P-C-8A1C7E42-1",
+          "severity_correct": true,
+          "truth_id": "TRUTH-006"
+        }
+      ],
+      "truth_count": 1
+    },
+    {
+      "actionable_prediction_count": 0,
+      "case_id": "C-8E6D2F49",
+      "case_kind": "no-finding",
+      "coverage_status": "complete",
+      "duplicate_prediction_ids": [],
+      "false_positive_prediction_ids": [],
+      "localization_error_prediction_ids": [],
+      "missed_truth_ids": [],
+      "strict_matches": [],
+      "truth_count": 0
+    },
+    {
+      "actionable_prediction_count": 1,
+      "case_id": "C-9A5D3B21",
+      "case_kind": "regression",
+      "coverage_status": "complete",
+      "duplicate_prediction_ids": [],
+      "false_positive_prediction_ids": [],
+      "localization_error_prediction_ids": [],
+      "missed_truth_ids": [],
+      "strict_matches": [
+        {
+          "prediction_id": "P-C-9A5D3B21-1",
+          "severity_correct": true,
+          "truth_id": "TRUTH-011"
+        }
+      ],
+      "truth_count": 1
+    },
+    {
+      "actionable_prediction_count": 1,
+      "case_id": "C-9C2D6F15",
+      "case_kind": "regression",
+      "coverage_status": "complete",
+      "duplicate_prediction_ids": [],
+      "false_positive_prediction_ids": [],
+      "localization_error_prediction_ids": [],
+      "missed_truth_ids": [],
+      "strict_matches": [
+        {
+          "prediction_id": "P-C-9C2D6F15-1",
+          "severity_correct": true,
+          "truth_id": "TRUTH-003"
+        }
+      ],
+      "truth_count": 1
+    }
+  ],
+  "cases_digest": "380a50b55513a3b3d77128a647327cb6c2350866682527ef5b8ffb5a29cdf049",
+  "corpus_version": "1.0.0",
+  "counts": {
+    "High": {
+      "fn": 0,
+      "fp": 1,
+      "tp": 5
+    },
+    "Middle": {
+      "fn": 1,
+      "fp": 0,
+      "tp": 6
+    },
+    "attribution_false_positives": 0,
+    "cases_complete": 16,
+    "cases_expected": 16,
+    "cases_returned": 16,
+    "duplicate_false_positives": 0,
+    "material": {
+      "fn": 0,
+      "fp": 0,
+      "tp": 12
+    },
+    "negative_cases": 4,
+    "negative_cases_clean": 4,
+    "negative_false_positives": 0,
+    "semantic_localization_errors": 0,
+    "semantic_matches": 12,
+    "severity_correct": 11,
+    "strict_matches": 12
+  },
+  "diffmap_digest": "e8a59b58aa99dbc4d6a9bcdf1d0f51138b34f626b1104510abf8814d0661bb5e",
+  "execution_mode": "live",
+  "metrics": {
+    "case_coverage": 1.0,
+    "case_record_coverage": 1.0,
+    "false_positives_per_case": 0.0,
+    "high_f1": 0.9090909090909091,
+    "high_precision": 0.8333333333333334,
+    "high_recall": 1.0,
+    "invalid_output_rate": 0.0,
+    "localization_accuracy": 1.0,
+    "material_f1": 1.0,
+    "material_precision": 1.0,
+    "material_recall": 1.0,
+    "middle_f1": 0.923076923076923,
+    "middle_precision": 1.0,
+    "middle_recall": 0.8571428571428571,
+    "negative_case_accuracy": 1.0,
+    "negative_fp_per_pr": 0.0,
+    "negative_fp_rate": 0.0,
+    "severity_agreement": 0.9166666666666666,
+    "severity_correct_recall": 0.9166666666666666
+  },
+  "model_digest": "482cd1936a304948dcfafa569b79e46b2e267621b47c015ae2b88b85b98e317f",
+  "prompt_digest": "d51759ed62817f71082f1da754ce0cd27eff411ebf13d7269b4f71df571e6f62",
+  "replicate_id": 1,
+  "reviewer": {
+    "model": "default",
+    "name": "codex-default",
+    "reasoning_effort": "default",
+    "version": "codex-cli-0.145.0-alpha.18"
+  },
+  "run_id": "blind-20260720-r1c",
+  "schema_version": 1,
+  "scorer_digest": "7154445e4ee93c551e722bd03e2cabd804a0feb4377692ccbf4f2e2cb2559876",
+  "severity_confusion": {
+    "High": {
+      "High": 5,
+      "Middle": 0
+    },
+    "Middle": {
+      "High": 1,
+      "Middle": 6
+    }
+  },
+  "skill_digest": "d9112283917393ce47550b84c5e053ee1e51df2438c66acf60b0baabc10c447d",
+  "status": "valid",
+  "taxonomy_digest": "4d83f1fc32aacaf61e1b9af5e9e548a9855e85ddff9f78744e9ce40835b307dc",
+  "tool_policy_digest": "f915363b409b46e6eb84ce7b74266ae8ac2ae261f5e00aa7a0612572a17605bc",
+  "truth_digest": "c7694d913289e085549b01936c294e079fff99c1adc5fa0b82c85c7c3d878b72",
+  "truth_outcomes": [
+    {
+      "case_id": "C-1B8E4A70",
+      "detected": true,
+      "predicted_severity": "High",
+      "prediction_id": "P-C-1B8E4A70-1",
+      "severity": "High",
+      "severity_correct": true,
+      "truth_id": "TRUTH-002"
+    },
+    {
+      "case_id": "C-1E7C4A96",
+      "detected": true,
+      "predicted_severity": "Middle",
+      "prediction_id": "P-C-1E7C4A96-1",
+      "severity": "Middle",
+      "severity_correct": true,
+      "truth_id": "TRUTH-010"
+    },
+    {
+      "case_id": "C-2D5F8C61",
+      "detected": true,
+      "predicted_severity": "High",
+      "prediction_id": "P-C-2D5F8C61-1",
+      "severity": "High",
+      "severity_correct": true,
+      "truth_id": "TRUTH-005"
+    },
+    {
+      "case_id": "C-3C6E1A85",
+      "detected": true,
+      "predicted_severity": "Middle",
+      "prediction_id": "P-C-3C6E1A85-1",
+      "severity": "Middle",
+      "severity_correct": true,
+      "truth_id": "TRUTH-008"
+    },
+    {
+      "case_id": "C-4E7A1B93",
+      "detected": true,
+      "predicted_severity": "High",
+      "prediction_id": "P-C-4E7A1B93-1",
+      "severity": "High",
+      "severity_correct": true,
+      "truth_id": "TRUTH-004"
+    },
+    {
+      "case_id": "C-4F8E6C72",
+      "detected": true,
+      "predicted_severity": "Middle",
+      "prediction_id": "P-C-4F8E6C72-1",
+      "severity": "Middle",
+      "severity_correct": true,
+      "truth_id": "TRUTH-012"
+    },
+    {
+      "case_id": "C-5F9B2D74",
+      "detected": true,
+      "predicted_severity": "Middle",
+      "prediction_id": "P-C-5F9B2D74-1",
+      "severity": "Middle",
+      "severity_correct": true,
+      "truth_id": "TRUTH-007"
+    },
+    {
+      "case_id": "C-6B2D9F30",
+      "detected": true,
+      "predicted_severity": "High",
+      "prediction_id": "P-C-6B2D9F30-1",
+      "severity": "Middle",
+      "severity_correct": false,
+      "truth_id": "TRUTH-009"
+    },
+    {
+      "case_id": "C-7F3A9D2C",
+      "detected": true,
+      "predicted_severity": "High",
+      "prediction_id": "P-C-7F3A9D2C-1",
+      "severity": "High",
+      "severity_correct": true,
+      "truth_id": "TRUTH-001"
+    },
+    {
+      "case_id": "C-8A1C7E42",
+      "detected": true,
+      "predicted_severity": "Middle",
+      "prediction_id": "P-C-8A1C7E42-1",
+      "severity": "Middle",
+      "severity_correct": true,
+      "truth_id": "TRUTH-006"
+    },
+    {
+      "case_id": "C-9A5D3B21",
+      "detected": true,
+      "predicted_severity": "Middle",
+      "prediction_id": "P-C-9A5D3B21-1",
+      "severity": "Middle",
+      "severity_correct": true,
+      "truth_id": "TRUTH-011"
+    },
+    {
+      "case_id": "C-9C2D6F15",
+      "detected": true,
+      "predicted_severity": "High",
+      "prediction_id": "P-C-9C2D6F15-1",
+      "severity": "High",
+      "severity_correct": true,
+      "truth_id": "TRUTH-003"
+    }
+  ]
+}

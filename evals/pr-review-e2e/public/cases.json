@@ -1,0 +1,390 @@
+{
+  "schema_version": 1,
+  "corpus_version": "1.0.0",
+  "cases": [
+    {
+      "case_id": "C-7F3A9D2C",
+      "title": "ローダーのキャッシュ準備",
+      "pr_body": "project loaderを後続のcache対応に備えて簡略化します。公開インターフェースは変更しません。",
+      "base_sha": "f2302faf7bb4090db285af495dd39a8726997ba0",
+      "head_sha": "e6d4d43d46a3f2b1bd667e88210a5f392e21dae2",
+      "rules": [
+        "変更が導入した具体的で再現可能な問題だけを報告する。",
+        "既存controlとcallerを確認してからfindingを確定する。"
+      ],
+      "changed_files": [
+        {
+          "path": "src/projects/load.ts",
+          "patch": "diff --git a/src/projects/load.ts b/src/projects/load.ts\nindex 1111111..2222222 100644\n--- a/src/projects/load.ts\n+++ b/src/projects/load.ts\n@@ -16,5 +16,4 @@ export async function loadProject(projectId: string, session: Session) {\n   const project = await projects.get(projectId);\n   if (!project) throw new NotFoundError();\n-  if (project.tenantId !== session.tenantId) throw new ForbiddenError();\n   return project;\n }"
+        }
+      ],
+      "context_files": [
+        {
+          "path": "src/routes/projects.ts",
+          "content": "router.get(\"/projects/:projectId\", requireSession, async (req, res) => {\n  const project = await loadProject(req.params.projectId, req.session);\n  res.json(project);\n});\n\n// requireSessionはユーザー認証だけを行い、tenant認可は行わない。"
+        }
+      ],
+      "checks": ["unit: pass (loader happy path only)"]
+    },
+    {
+      "case_id": "C-1B8E4A70",
+      "title": "期限切れセッション処理の整理",
+      "pr_body": "期限切れセッションを削除する定期jobのquery構築を簡略化します。",
+      "base_sha": "8f4a58ebc9f77a0ebbb334a7675b834c014bab07",
+      "head_sha": "cefdedcf4e1f77ff149507bbe720fd2387d9391c",
+      "rules": [
+        "変更が導入した具体的で再現可能な問題だけを報告する。",
+        "destructive operationでは対象集合とrollback可能性を確認する。"
+      ],
+      "changed_files": [
+        {
+          "path": "src/jobs/delete-expired-sessions.ts",
+          "patch": "diff --git a/src/jobs/delete-expired-sessions.ts b/src/jobs/delete-expired-sessions.ts\nindex 1111111..2222222 100644\n--- a/src/jobs/delete-expired-sessions.ts\n+++ b/src/jobs/delete-expired-sessions.ts\n@@ -40,4 +40,4 @@ export async function deleteExpiredSessions(now: Date) {\n   const cutoff = new Date(now.getTime() - RETENTION_MS);\n \n-  await db.sessions.deleteMany({ where: { expiresAt: { lt: cutoff } } });\n+  await db.sessions.deleteMany({});\n }"
+        }
+      ],
+      "context_files": [
+        {
+          "path": "src/jobs/schedule.ts",
+          "content": "scheduler.daily(\"delete-expired-sessions\", () => deleteExpiredSessions(new Date()));\n\n// session削除はhard deleteで、backupからの個別復元手段はない。"
+        }
+      ],
+      "checks": ["unit: pass (empty database fixture)"]
+    },
+    {
+      "case_id": "C-9C2D6F15",
+      "title": "請求状態カラムの追加",
+      "pr_body": "invoiceに処理状態を保存するカラムを追加します。アプリ側の利用は後続PRで行います。",
+      "base_sha": "189b04b82b2df0d443a2237ec8cabd5860c1c729",
+      "head_sha": "a758bdf1360c2898edf94aadaf3158606fd73fda",
+      "rules": [
+        "変更が導入した具体的で再現可能な問題だけを報告する。",
+        "migrationでは既存データ、deploy順序、rollbackを確認する。"
+      ],
+      "changed_files": [
+        {
+          "path": "migrations/20260720_add_invoice_status.sql",
+          "patch": "diff --git a/migrations/20260720_add_invoice_status.sql b/migrations/20260720_add_invoice_status.sql\nnew file mode 100644\nindex 0000000..2222222\n--- /dev/null\n+++ b/migrations/20260720_add_invoice_status.sql\n@@ -0,0 +1,2 @@\n+-- Add processing state for invoices.\n+ALTER TABLE invoices ADD COLUMN status text NOT NULL;"
+        }
+      ],
+      "context_files": [
+        {
+          "path": "docs/deployment.md",
+          "content": "Production uses rolling deployments. Migrations run before all old application instances are stopped. The invoices table contains existing rows and old instances do not write a status column."
+        }
+      ],
+      "checks": ["sql lint: pass"]
+    },
+    {
+      "case_id": "C-4E7A1B93",
+      "title": "注文レスポンスの命名統一",
+      "pr_body": "注文レスポンスの識別子を内部モデルと同じ名称へ揃えます。",
+      "base_sha": "b94368230c11ea30e71198fe11e88b04b590fcc4",
+      "head_sha": "39b75406c79d1a439217105a845f13147dfb5002",
+      "rules": [
+        "変更が導入した具体的で再現可能な問題だけを報告する。",
+        "public contractのconsumerとversioningを確認する。"
+      ],
+      "changed_files": [
+        {
+          "path": "src/api/orders.ts",
+          "patch": "diff --git a/src/api/orders.ts b/src/api/orders.ts\nindex 1111111..2222222 100644\n--- a/src/api/orders.ts\n+++ b/src/api/orders.ts\n@@ -30,3 +30,3 @@ export function serializeOrder(order: Order) {\n   const status = normalizeStatus(order.status);\n-  return { id: order.id, status };\n+  return { orderId: order.id, status };\n }"
+        }
+      ],
+      "context_files": [
+        {
+          "path": "openapi/v1.yaml",
+          "content": "Order:\n  required: [id, status]\n  properties:\n    id: { type: string }\n    status: { type: string }\n\nThe generated v1 SDK reads response.id and no API version bump is planned."
+        }
+      ],
+      "checks": ["unit: pass (status assertion only)"]
+    },
+    {
+      "case_id": "C-2D5F8C61",
+      "title": "ファイル取得処理の更新",
+      "pr_body": "download routeでfile metadataを先に取得し、filename headerを設定できるようにします。",
+      "base_sha": "b762bd7854d942b002f6b8327108d9c7a178b939",
+      "head_sha": "a8be8584ceab2e91fab2d838eb855442ba44fe13",
+      "rules": [
+        "変更が導入した具体的で再現可能な問題だけを報告する。",
+        "認証とobject-level authorizationを区別する。"
+      ],
+      "changed_files": [
+        {
+          "path": "src/routes/files.ts",
+          "patch": "diff --git a/src/routes/files.ts b/src/routes/files.ts\nindex 1111111..2222222 100644\n--- a/src/routes/files.ts\n+++ b/src/routes/files.ts\n@@ -22,5 +22,5 @@ router.get(\"/files/:fileId\", requireSession, async (req, res) => {\n   const user = req.session.user;\n \n-  const file = await files.getForTenant(req.params.fileId, user.tenantId);\n+  const file = await files.get(req.params.fileId);\n   if (!file) throw new NotFoundError();\n   res.setHeader(\"Content-Disposition\", `attachment; filename=${file.name}`);"
+        }
+      ],
+      "context_files": [
+        {
+          "path": "src/repositories/files.ts",
+          "content": "export const files = {\n  get(id: string) { return db.file.findUnique({ where: { id } }); },\n  getForTenant(id: string, tenantId: string) {\n    return db.file.findFirst({ where: { id, tenantId } });\n  }\n};\n\nFile IDs are UUIDs and may appear in shared audit links. requireSession only authenticates the user."
+        }
+      ],
+      "checks": ["route integration: pass (same-tenant fixture)"]
+    },
+    {
+      "case_id": "C-8A1C7E42",
+      "title": "通知処理の非同期化",
+      "pr_body": "ユーザー作成eventのwelcome notificationをqueueへ送るよう変更します。",
+      "base_sha": "4d4e3223497ed9031783a7003b41315063def021",
+      "head_sha": "f864f918c744005e189ed5fd7db317da26559cf1",
+      "rules": [
+        "変更が導入した具体的で再現可能な問題だけを報告する。",
+        "event処理ではretryとidempotency controlを確認する。"
+      ],
+      "changed_files": [
+        {
+          "path": "src/webhooks/user-created.ts",
+          "patch": "diff --git a/src/webhooks/user-created.ts b/src/webhooks/user-created.ts\nindex 1111111..2222222 100644\n--- a/src/webhooks/user-created.ts\n+++ b/src/webhooks/user-created.ts\n@@ -15,4 +15,5 @@ export async function handleUserCreated(req: Request) {\n   const payload = verifyAndParse(req);\n \n+  await queue.enqueue(\"welcome-email\", payload);\n   return new Response(null, { status: 204 });\n }"
+        }
+      ],
+      "context_files": [
+        {
+          "path": "docs/webhooks.md",
+          "content": "The provider retries a delivery until a 2xx response is observed and supplies a stable deliveryId. The queue has at-least-once delivery. No table or unique constraint stores deliveryId."
+        }
+      ],
+      "checks": ["unit: pass (single delivery)"]
+    },
+    {
+      "case_id": "C-5F9B2D74",
+      "title": "プロフィール保存時の応答整理",
+      "pr_body": "profile endpointの例外時responseをクライアントが扱いやすい形へ統一します。",
+      "base_sha": "8d83b6e7af9a72948a460df8ec94dca1596cae0a",
+      "head_sha": "8a2ec5388e887f367279740d268abbb93c274fb0",
+      "rules": [
+        "変更が導入した具体的で再現可能な問題だけを報告する。",
+        "error pathではclient behaviorとretryを確認する。"
+      ],
+      "changed_files": [
+        {
+          "path": "src/routes/profile.ts",
+          "patch": "diff --git a/src/routes/profile.ts b/src/routes/profile.ts\nindex 1111111..2222222 100644\n--- a/src/routes/profile.ts\n+++ b/src/routes/profile.ts\n@@ -39,7 +39,7 @@ export async function updateProfile(req: Request, res: Response) {\n   try {\n     await saveProfile(req.user.id, req.body);\n     return res.status(204).end();\n   } catch (error) {\n     logger.error(error);\n-    return res.status(503).json({ ok: false });\n+    return res.status(200).json({ ok: true });\n   }"
+        }
+      ],
+      "context_files": [
+        {
+          "path": "src/client/save-profile.ts",
+          "content": "export async function submitProfile(input: ProfileInput) {\n  const response = await fetch(\"/profile\", { method: \"PUT\", body: JSON.stringify(input) });\n  if (!response.ok) retryLater(input);\n  return response.ok;\n}"
+        }
+      ],
+      "checks": ["unit: pass (successful save)"]
+    },
+    {
+      "case_id": "C-3C6E1A85",
+      "title": "カウンター監査情報の追加",
+      "pr_body": "counter更新前の値をauditへ記録できるよう、更新処理を明示化します。",
+      "base_sha": "9be4cdd8fd9221f49fd3a50ffdf2a1fd65dc88ed",
+      "head_sha": "8832ae1ff2f05e88325cec499bb455d95832383a",
+      "rules": [
+        "変更が導入した具体的で再現可能な問題だけを報告する。",
+        "read-modify-writeでは並行実行を確認する。"
+      ],
+      "changed_files": [
+        {
+          "path": "src/counters/increment.ts",
+          "patch": "diff --git a/src/counters/increment.ts b/src/counters/increment.ts\nindex 1111111..2222222 100644\n--- a/src/counters/increment.ts\n+++ b/src/counters/increment.ts\n@@ -32,5 +32,5 @@ export async function incrementCounter(id: string) {\n   const current = await db.counter.findUniqueOrThrow({ where: { id } });\n   await audit.record({ id, previous: current.count });\n \n-  await db.counter.update({ where: { id }, data: { count: { increment: 1 } } });\n+  await db.counter.update({ where: { id }, data: { count: current.count + 1 } });\n }"
+        }
+      ],
+      "context_files": [
+        {
+          "path": "docs/counters.md",
+          "content": "The endpoint is called concurrently by multiple workers. The database default isolation level is READ COMMITTED and no row lock is acquired by findUniqueOrThrow."
+        }
+      ],
+      "checks": ["unit: pass (single caller)"]
+    },
+    {
+      "case_id": "C-6B2D9F30",
+      "title": "注文作成フローの平坦化",
+      "pr_body": "order作成とaudit記録を直列の処理へ整理し、debugしやすくします。",
+      "base_sha": "ff8ef33d431b9f4a917e635e75e11daf1ea31ec8",
+      "head_sha": "2bc6030d9bbbe178d3db859d13295e8f85d3d2d9",
+      "rules": [
+        "変更が導入した具体的で再現可能な問題だけを報告する。",
+        "複数writeではpartial failureとretryを確認する。"
+      ],
+      "changed_files": [
+        {
+          "path": "src/orders/create.ts",
+          "patch": "diff --git a/src/orders/create.ts b/src/orders/create.ts\nindex 1111111..2222222 100644\n--- a/src/orders/create.ts\n+++ b/src/orders/create.ts\n@@ -51,9 +51,7 @@ export async function createOrder(input: OrderInput) {\n   const data = normalizeOrder(input);\n   const auditData = buildAudit(data);\n \n-  return db.transaction(async (tx) => {\n-    const order = await tx.orders.create({ data });\n-    await tx.audit.create({ data: { ...auditData, orderId: order.id } });\n-    return order;\n-  });\n+  const order = await db.orders.create({ data });\n+  await db.audit.create({ data: { ...auditData, orderId: order.id } });\n+  return order;\n }"
+        }
+      ],
+      "context_files": [
+        {
+          "path": "src/routes/orders.ts",
+          "content": "router.post(\"/orders\", async (req, res) => {\n  try { res.status(201).json(await createOrder(req.body)); }\n  catch { res.status(500).end(); }\n});\n\nThe client retries 500 responses and no idempotency key is used."
+        }
+      ],
+      "checks": ["unit: pass (audit succeeds)"]
+    },
+    {
+      "case_id": "C-1E7C4A96",
+      "title": "日付生成処理の標準化",
+      "pr_body": "report date parserを組み込みDate constructorへ置換します。",
+      "base_sha": "d9e0eefde59dd09e8ee2ad2d22813f756bd530fc",
+      "head_sha": "e4806dd2cca1be718c46de62ed5cad8136a1e22d",
+      "rules": [
+        "変更が導入した具体的で再現可能な問題だけを報告する。",
+        "date/time変更ではtimezone contractを確認する。"
+      ],
+      "changed_files": [
+        {
+          "path": "src/reporting/date-range.ts",
+          "patch": "diff --git a/src/reporting/date-range.ts b/src/reporting/date-range.ts\nindex 1111111..2222222 100644\n--- a/src/reporting/date-range.ts\n+++ b/src/reporting/date-range.ts\n@@ -25,4 +25,4 @@ export function parseReportDate(input: string): Date {\n   const [year, month, day] = input.split(\"-\").map(Number);\n \n-  return new Date(Date.UTC(year, month - 1, day));\n+  return new Date(year, month - 1, day);\n }"
+        }
+      ],
+      "context_files": [
+        {
+          "path": "docs/reporting-api.md",
+          "content": "A date-only input denotes 00:00:00 UTC on that calendar date. Deployments run in UTC and America/Los_Angeles, and both must produce the same timestamp."
+        }
+      ],
+      "checks": ["unit: pass (CI timezone UTC)"]
+    },
+    {
+      "case_id": "C-9A5D3B21",
+      "title": "catalog client optionの整理",
+      "pr_body": "fetch optionを共通形式へ合わせ、不要になった個別設定を削除します。",
+      "base_sha": "a39a9d3ea107937a308a49d3ec045fc86d551ea6",
+      "head_sha": "65258105a9745cd0cf5e80b17a147a5bec0f3308",
+      "rules": [
+        "変更が導入した具体的で再現可能な問題だけを報告する。",
+        "外部I/Oではtimeout、retry、resource boundを確認する。"
+      ],
+      "changed_files": [
+        {
+          "path": "src/clients/catalog.ts",
+          "patch": "diff --git a/src/clients/catalog.ts b/src/clients/catalog.ts\nindex 1111111..2222222 100644\n--- a/src/clients/catalog.ts\n+++ b/src/clients/catalog.ts\n@@ -18,6 +18,5 @@ export function fetchCatalog(id: string) {\n   return fetch(`${CATALOG_URL}/items/${id}`, {\n     method: \"GET\",\n-    signal: AbortSignal.timeout(5000),\n     headers: defaultHeaders(),\n   });\n }"
+        }
+      ],
+      "context_files": [
+        {
+          "path": "src/workers/catalog-sync.ts",
+          "content": "const pool = new WorkerPool({ size: 8 });\npool.runEach(itemIds, (id) => fetchCatalog(id));\n\nThe upstream can leave connections open without a response. No proxy or shared fetch timeout is configured."
+        }
+      ],
+      "checks": ["unit: pass (mock responds immediately)"]
+    },
+    {
+      "case_id": "C-4F8E6C72",
+      "title": "イベント一覧の取得件数指定",
+      "pr_body": "event list endpointでclientが必要な取得件数を指定できるようにします。",
+      "base_sha": "8ceaf490b637fd7c05d9b4b5f11dc8b80d81e034",
+      "head_sha": "646267414b423d06b415e0254077b81b4b908d8a",
+      "rules": [
+        "変更が導入した具体的で再現可能な問題だけを報告する。",
+        "外部入力がwork量を決める場合は上限を確認する。"
+      ],
+      "changed_files": [
+        {
+          "path": "src/routes/events.ts",
+          "patch": "diff --git a/src/routes/events.ts b/src/routes/events.ts\nindex 1111111..2222222 100644\n--- a/src/routes/events.ts\n+++ b/src/routes/events.ts\n@@ -59,5 +59,5 @@ router.get(\"/events\", requireSession, async (req, res) => {\n   const tenantId = req.session.tenantId;\n \n-  const limit = Math.min(Number(req.query.limit ?? 50), 200);\n+  const limit = Number(req.query.limit ?? 50);\n   const rows = await db.event.findMany({ where: { tenantId }, take: limit });\n   res.json(rows);"
+        }
+      ],
+      "context_files": [
+        {
+          "path": "src/db/event-repository.ts",
+          "content": "Event rows contain a JSON payload averaging 20 KB. findMany materializes all selected rows before serialization. Authenticated tenants may contain millions of events."
+        }
+      ],
+      "checks": ["route integration: pass (10-row fixture)"]
+    },
+    {
+      "case_id": "C-2A9B5D83",
+      "title": "レポート表示名の更新",
+      "pr_body": "report cardのlabelを画面上の用語へ揃えます。計算方法は変更しません。",
+      "base_sha": "2a3b8404daffbf20853183d57f1c3bd1f506a002",
+      "head_sha": "27156f32b1b760387fe13d34ec58a51ed1ea5719",
+      "rules": [
+        "変更が導入した具体的で再現可能な問題だけを報告する。",
+        "baseにも同じ問題がある場合はPR findingにしない。"
+      ],
+      "changed_files": [
+        {
+          "path": "src/reporting/summary.ts",
+          "patch": "diff --git a/src/reporting/summary.ts b/src/reporting/summary.ts\nindex 1111111..2222222 100644\n--- a/src/reporting/summary.ts\n+++ b/src/reporting/summary.ts\n@@ -8,4 +8,4 @@ export function buildSummary(total: number, count: number) {\n   const percentage = total / count;\n \n-  return { label: \"Completion\", percentage };\n+  return { label: \"Progress\", percentage };\n }"
+        }
+      ],
+      "context_files": [
+        {
+          "path": "src/reporting/summary.test.ts",
+          "content": "test(\"formats a summary\", () => {\n  expect(buildSummary(5, 2).label).toBe(\"Progress\");\n});\n\nThe base and head implementations both divide by count, and callers could already pass zero before this PR."
+        }
+      ],
+      "checks": ["unit: pass"]
+    },
+    {
+      "case_id": "C-7D1F4E60",
+      "title": "record削除helperの整理",
+      "pr_body": "private helperを新しいrepository signatureへ合わせます。呼び出しフローは変更しません。",
+      "base_sha": "b29919e911d66bf26021e356e6b3cf21fc0459b2",
+      "head_sha": "3de467aaa8d8a115f31500c172c238a240c1ab33",
+      "rules": [
+        "変更が導入した具体的で再現可能な問題だけを報告する。",
+        "helperだけで断定せず、全callerと入力contractを確認する。"
+      ],
+      "changed_files": [
+        {
+          "path": "src/records/delete-record.ts",
+          "patch": "diff --git a/src/records/delete-record.ts b/src/records/delete-record.ts\nindex 1111111..2222222 100644\n--- a/src/records/delete-record.ts\n+++ b/src/records/delete-record.ts\n@@ -26,2 +26,2 @@ async function deleteRecord(id: string, tenantId: string) {\n-  return db.record.delete({ where: { id_tenantId: { id, tenantId } } });\n+  return db.record.delete({ where: { id } });\n }"
+        }
+      ],
+      "context_files": [
+        {
+          "path": "src/routes/records.ts",
+          "content": "// deleteRecord is private to its module and this is its only caller.\nconst record = await db.record.findFirst({\n  where: { id: req.params.id, tenantId: req.session.tenantId }\n});\nif (!record) throw new NotFoundError();\nawait deleteRecord(record.id, req.session.tenantId);\n\nRecord IDs are non-reused UUIDs."
+        }
+      ],
+      "checks": ["route integration: pass (cross-tenant ID returns 404)"]
+    },
+    {
+      "case_id": "C-5C3A8B17",
+      "title": "resource取得時の応答統一",
+      "pr_body": "SEC-12の受け入れ条件に従い、存在しないresourceと権限のないresourceを同じ404応答へ統一します。これはID列挙を防ぐための意図的な公開挙動変更です。",
+      "base_sha": "9b37a6b61d167d9626ac44566a918c1998046e39",
+      "head_sha": "c02a1dc8a7eaee5adfd0e3829dffc7810659ae48",
+      "rules": [
+        "変更が導入した具体的で再現可能な問題だけを報告する。",
+        "明示された仕様とacceptance criteriaを確認する。"
+      ],
+      "changed_files": [
+        {
+          "path": "src/resources/get-resource.ts",
+          "patch": "diff --git a/src/resources/get-resource.ts b/src/resources/get-resource.ts\nindex 1111111..2222222 100644\n--- a/src/resources/get-resource.ts\n+++ b/src/resources/get-resource.ts\n@@ -36,6 +36,6 @@ export async function getResource(id: string, user: User) {\n   const resource = await resources.get(id);\n   if (!resource) throw new NotFoundError();\n   if (!canRead(user, resource)) {\n-    throw new ForbiddenError();\n+    throw new NotFoundError();\n   }\n   return resource;"
+        }
+      ],
+      "context_files": [
+        {
+          "path": "docs/security/resource-enumeration.md",
+          "content": "SEC-12: Read endpoints MUST return the same 404 response for missing and unauthorized resources. Clients MUST NOT distinguish these states."
+        }
+      ],
+      "checks": ["security integration: pass (missing and unauthorized responses match)"]
+    },
+    {
+      "case_id": "C-8E6D2F49",
+      "title": "管理routeの共通化",
+      "pr_body": "各handlerの重複処理をrouter-level middlewareへ移します。",
+      "base_sha": "86cb66e1fc2f2f887c4b1be307826978f6b87921",
+      "head_sha": "e7a261ab324b61662b1ab0df28c4c2dedb41cff4",
+      "rules": [
+        "変更が導入した具体的で再現可能な問題だけを報告する。",
+        "削除されたguardに代替controlがないか確認する。"
+      ],
+      "changed_files": [
+        {
+          "path": "src/routes/admin.ts",
+          "patch": "diff --git a/src/routes/admin.ts b/src/routes/admin.ts\nindex 1111111..2222222 100644\n--- a/src/routes/admin.ts\n+++ b/src/routes/admin.ts\n@@ -2,4 +2,5 @@ import { requireAdmin } from \"../auth/require-admin\";\n const router = new Router();\n \n+router.use(requireAdmin);\n router.get(\"/stats\", statsHandler);\n router.post(\"/reindex\", reindexHandler);\n@@ -11,5 +12,4 @@ async function reindexHandler(req: Request, res: Response) {\n   const job = await jobs.get(\"search-reindex\");\n-  requireAdmin(req.user);\n   await job.start();\n   res.status(202).end();\n }"
+        }
+      ],
+      "context_files": [
+        {
+          "path": "src/app.ts",
+          "content": "app.use(\"/admin\", adminRouter);\n\nThe router is not exported or mounted elsewhere. Router middleware runs before all matching handlers, and requireAdmin rejects non-admin users."
+        }
+      ],
+      "checks": ["route integration: pass (non-admin stats and reindex both return 403)"]
+    }
+  ]
+}

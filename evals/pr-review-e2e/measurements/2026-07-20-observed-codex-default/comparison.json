@@ -1,0 +1,32 @@
+{
+  "baseline_measurement_id": "observed-20260720-codex-default",
+  "baseline_skill_digest": "d9112283917393ce47550b84c5e053ee1e51df2438c66acf60b0baabc10c447d",
+  "candidate_measurement_id": "observed-20260720-codex-default",
+  "candidate_skill_digest": "d9112283917393ce47550b84c5e053ee1e51df2438c66acf60b0baabc10c447d",
+  "deltas": {
+    "case_coverage": 0.0,
+    "case_record_coverage": 0.0,
+    "false_positives_per_case": 0.0,
+    "high_f1": 0.0,
+    "high_precision": 0.0,
+    "high_recall": 0.0,
+    "invalid_output_rate": 0.0,
+    "localization_accuracy": 0.0,
+    "material_f1": 0.0,
+    "material_precision": 0.0,
+    "material_recall": 0.0,
+    "middle_f1": 0.0,
+    "middle_precision": 0.0,
+    "middle_recall": 0.0,
+    "negative_case_accuracy": 0.0,
+    "negative_fp_per_pr": 0.0,
+    "negative_fp_rate": 0.0,
+    "severity_agreement": 0.0,
+    "severity_correct_recall": 0.0
+  },
+  "schema_version": 1,
+  "status": "fail",
+  "violations": [
+    "high_precision=0.7894736842105263 is below floor 0.9"
+  ]
+}

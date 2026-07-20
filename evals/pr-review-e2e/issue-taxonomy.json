@@ -1,0 +1,121 @@
+{
+  "schema_version": 1,
+  "taxonomy_version": "1.0.0",
+  "issue_codes": [
+    {
+      "code": "TENANT_GUARD_REMOVED",
+      "category": "security",
+      "description": "既存のtenant境界guardが削除され、別tenantのresourceへ到達できる。"
+    },
+    {
+      "code": "UNSCOPED_DESTRUCTIVE_DELETE",
+      "category": "data-integrity",
+      "description": "破壊的なdeleteの対象条件が失われ、意図しないデータを不可逆に削除する。"
+    },
+    {
+      "code": "NON_NULL_COLUMN_WITHOUT_BACKFILL",
+      "category": "migration",
+      "description": "既存rowまたは旧writerを考慮せず必須columnを追加し、migrationまたはrolling deployを破壊する。"
+    },
+    {
+      "code": "PUBLIC_RESPONSE_FIELD_REMOVED",
+      "category": "compatibility",
+      "description": "versionを維持した公開responseからrequired fieldを削除またはrenameし、既存consumerを破壊する。"
+    },
+    {
+      "code": "OBJECT_AUTHORIZATION_BYPASS",
+      "category": "security",
+      "description": "認証済み利用者が所有権やtenant確認なしで任意objectへアクセスできる。"
+    },
+    {
+      "code": "WEBHOOK_NOT_IDEMPOTENT",
+      "category": "idempotency",
+      "description": "再送されるeventを重複排除せず副作用へ変換し、同一処理を複数回実行する。"
+    },
+    {
+      "code": "WRITE_FAILURE_REPORTED_AS_SUCCESS",
+      "category": "error-handling",
+      "description": "永続化失敗を成功responseとして返し、callerが失敗を検出またはretryできない。"
+    },
+    {
+      "code": "LOST_UPDATE_RACE",
+      "category": "concurrency",
+      "description": "非atomicなread-modify-writeにより、並行更新の一部を失う。"
+    },
+    {
+      "code": "PARTIAL_WRITE_WITHOUT_TRANSACTION",
+      "category": "data-integrity",
+      "description": "一体であるべき複数writeをtransaction外で実行し、途中失敗で部分状態を残す。"
+    },
+    {
+      "code": "LOCAL_TIME_IN_UTC_CONTRACT",
+      "category": "correctness",
+      "description": "UTCとして定義された日時をlocal timezoneで生成し、環境依存の時刻ずれを起こす。"
+    },
+    {
+      "code": "UPSTREAM_TIMEOUT_REMOVED",
+      "category": "operations",
+      "description": "外部I/Oの有限timeoutを削除し、停止したupstreamがworker資源を無期限に占有する。"
+    },
+    {
+      "code": "PAGE_SIZE_LIMIT_REMOVED",
+      "category": "performance",
+      "description": "外部入力で決まるqueryまたはresponse sizeの上限を削除し、過大な処理を許す。"
+    },
+    {
+      "code": "INPUT_VALIDATION_REMOVED",
+      "category": "correctness",
+      "description": "既存の入力validationが失われ、不正値がdomain処理へ到達する。"
+    },
+    {
+      "code": "AUTHENTICATION_BYPASS",
+      "category": "security",
+      "description": "未認証のcallerが認証済み経路へ到達できる。"
+    },
+    {
+      "code": "SECRET_EXPOSURE",
+      "category": "security",
+      "description": "secretまたはcredentialがresponse、log、artifactへ露出する。"
+    },
+    {
+      "code": "QUERY_INJECTION",
+      "category": "security",
+      "description": "未trustedな入力がquery構造へ連結され、命令として解釈される。"
+    },
+    {
+      "code": "CACHE_INVALIDATION_MISSING",
+      "category": "correctness",
+      "description": "write後のcache invalidationが失われ、古い状態が継続して返る。"
+    },
+    {
+      "code": "UNBOUNDED_RETRY",
+      "category": "operations",
+      "description": "終了条件やbackoffのないretryがresourceを継続消費する。"
+    },
+    {
+      "code": "RESOURCE_LEAK",
+      "category": "operations",
+      "description": "file、connection、lockなどのresourceが失敗経路で解放されない。"
+    },
+    {
+      "code": "TEST_FALSE_SUCCESS",
+      "category": "testing",
+      "description": "test filter、skip、mock、assertion欠落により検証対象なしで成功する。"
+    },
+    {
+      "code": "OBSERVABILITY_REGRESSION",
+      "category": "operations",
+      "description": "重要な失敗のlog、metric、traceが失われ、運用時に検出できない。"
+    },
+    {
+      "code": "NULL_HANDLING_REGRESSION",
+      "category": "correctness",
+      "description": "nullable入力または欠損状態の処理が失われ、runtime failureを起こす。"
+    },
+    {
+      "code": "OTHER",
+      "category": "other",
+      "description": "taxonomyの既知codeに一致しない予測。誤指摘を失わず記録するために使用する。"
+    }
+  ]
+}

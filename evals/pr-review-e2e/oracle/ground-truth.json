@@ -1,0 +1,294 @@
+{
+  "schema_version": 1,
+  "corpus_version": "1.0.0",
+  "cases": [
+    {
+      "case_id": "C-7F3A9D2C",
+      "case_kind": "regression",
+      "negative_reason": null,
+      "findings": [
+        {
+          "truth_id": "TRUTH-001",
+          "severity": "High",
+          "evidence_level": "E2",
+          "accepted_matchers": [
+            {
+              "issue_code": "TENANT_GUARD_REMOVED",
+              "category": "security",
+              "path": "src/projects/load.ts",
+              "anchors": [{ "side": "LEFT", "start": 18, "end": 18 }]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "C-1B8E4A70",
+      "case_kind": "regression",
+      "negative_reason": null,
+      "findings": [
+        {
+          "truth_id": "TRUTH-002",
+          "severity": "High",
+          "evidence_level": "E2",
+          "accepted_matchers": [
+            {
+              "issue_code": "UNSCOPED_DESTRUCTIVE_DELETE",
+              "category": "data-integrity",
+              "path": "src/jobs/delete-expired-sessions.ts",
+              "anchors": [
+                { "side": "LEFT", "start": 42, "end": 42 },
+                { "side": "RIGHT", "start": 42, "end": 42 }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "C-9C2D6F15",
+      "case_kind": "regression",
+      "negative_reason": null,
+      "findings": [
+        {
+          "truth_id": "TRUTH-003",
+          "severity": "High",
+          "evidence_level": "E2",
+          "accepted_matchers": [
+            {
+              "issue_code": "NON_NULL_COLUMN_WITHOUT_BACKFILL",
+              "category": "migration",
+              "path": "migrations/20260720_add_invoice_status.sql",
+              "anchors": [{ "side": "RIGHT", "start": 2, "end": 2 }]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "C-4E7A1B93",
+      "case_kind": "regression",
+      "negative_reason": null,
+      "findings": [
+        {
+          "truth_id": "TRUTH-004",
+          "severity": "High",
+          "evidence_level": "E2",
+          "accepted_matchers": [
+            {
+              "issue_code": "PUBLIC_RESPONSE_FIELD_REMOVED",
+              "category": "compatibility",
+              "path": "src/api/orders.ts",
+              "anchors": [
+                { "side": "LEFT", "start": 31, "end": 31 },
+                { "side": "RIGHT", "start": 31, "end": 31 }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "C-2D5F8C61",
+      "case_kind": "regression",
+      "negative_reason": null,
+      "findings": [
+        {
+          "truth_id": "TRUTH-005",
+          "severity": "High",
+          "evidence_level": "E2",
+          "accepted_matchers": [
+            {
+              "issue_code": "OBJECT_AUTHORIZATION_BYPASS",
+              "category": "security",
+              "path": "src/routes/files.ts",
+              "anchors": [
+                { "side": "LEFT", "start": 24, "end": 24 },
+                { "side": "RIGHT", "start": 24, "end": 24 }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "C-8A1C7E42",
+      "case_kind": "regression",
+      "negative_reason": null,
+      "findings": [
+        {
+          "truth_id": "TRUTH-006",
+          "severity": "Middle",
+          "evidence_level": "E2",
+          "accepted_matchers": [
+            {
+              "issue_code": "WEBHOOK_NOT_IDEMPOTENT",
+              "category": "idempotency",
+              "path": "src/webhooks/user-created.ts",
+              "anchors": [{ "side": "RIGHT", "start": 17, "end": 17 }]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "C-5F9B2D74",
+      "case_kind": "regression",
+      "negative_reason": null,
+      "findings": [
+        {
+          "truth_id": "TRUTH-007",
+          "severity": "Middle",
+          "evidence_level": "E2",
+          "accepted_matchers": [
+            {
+              "issue_code": "WRITE_FAILURE_REPORTED_AS_SUCCESS",
+              "category": "error-handling",
+              "path": "src/routes/profile.ts",
+              "anchors": [
+                { "side": "LEFT", "start": 44, "end": 44 },
+                { "side": "RIGHT", "start": 44, "end": 44 }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "C-3C6E1A85",
+      "case_kind": "regression",
+      "negative_reason": null,
+      "findings": [
+        {
+          "truth_id": "TRUTH-008",
+          "severity": "Middle",
+          "evidence_level": "E2",
+          "accepted_matchers": [
+            {
+              "issue_code": "LOST_UPDATE_RACE",
+              "category": "concurrency",
+              "path": "src/counters/increment.ts",
+              "anchors": [
+                { "side": "LEFT", "start": 35, "end": 35 },
+                { "side": "RIGHT", "start": 35, "end": 35 }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "C-6B2D9F30",
+      "case_kind": "regression",
+      "negative_reason": null,
+      "findings": [
+        {
+          "truth_id": "TRUTH-009",
+          "severity": "Middle",
+          "evidence_level": "E2",
+          "accepted_matchers": [
+            {
+              "issue_code": "PARTIAL_WRITE_WITHOUT_TRANSACTION",
+              "category": "data-integrity",
+              "path": "src/orders/create.ts",
+              "anchors": [
+                { "side": "LEFT", "start": 54, "end": 58 },
+                { "side": "RIGHT", "start": 54, "end": 56 }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "C-1E7C4A96",
+      "case_kind": "regression",
+      "negative_reason": null,
+      "findings": [
+        {
+          "truth_id": "TRUTH-010",
+          "severity": "Middle",
+          "evidence_level": "E2",
+          "accepted_matchers": [
+            {
+              "issue_code": "LOCAL_TIME_IN_UTC_CONTRACT",
+              "category": "correctness",
+              "path": "src/reporting/date-range.ts",
+              "anchors": [
+                { "side": "LEFT", "start": 27, "end": 27 },
+                { "side": "RIGHT", "start": 27, "end": 27 }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "C-9A5D3B21",
+      "case_kind": "regression",
+      "negative_reason": null,
+      "findings": [
+        {
+          "truth_id": "TRUTH-011",
+          "severity": "Middle",
+          "evidence_level": "E2",
+          "accepted_matchers": [
+            {
+              "issue_code": "UPSTREAM_TIMEOUT_REMOVED",
+              "category": "operations",
+              "path": "src/clients/catalog.ts",
+              "anchors": [{ "side": "LEFT", "start": 20, "end": 20 }]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "C-4F8E6C72",
+      "case_kind": "regression",
+      "negative_reason": null,
+      "findings": [
+        {
+          "truth_id": "TRUTH-012",
+          "severity": "Middle",
+          "evidence_level": "E2",
+          "accepted_matchers": [
+            {
+              "issue_code": "PAGE_SIZE_LIMIT_REMOVED",
+              "category": "performance",
+              "path": "src/routes/events.ts",
+              "anchors": [
+                { "side": "LEFT", "start": 61, "end": 61 },
+                { "side": "RIGHT", "start": 61, "end": 61 }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "C-2A9B5D83",
+      "case_kind": "no-finding",
+      "negative_reason": "潜在的なzero divisionはbaseにも同じ到達性で存在し、PRはlabelだけを変更しているため帰属しない。",
+      "findings": []
+    },
+    {
+      "case_id": "C-7D1F4E60",
+      "case_kind": "no-finding",
+      "negative_reason": "唯一のcallerがtenant-scoped lookup済みの非再利用UUIDだけをhelperへ渡すため、現実的な越境経路がない。",
+      "findings": []
+    },
+    {
+      "case_id": "C-5C3A8B17",
+      "case_kind": "no-finding",
+      "negative_reason": "404への統一はPR本文とsecurity specificationが要求する意図的な公開挙動である。",
+      "findings": []
+    },
+    {
+      "case_id": "C-8E6D2F49",
+      "case_kind": "no-finding",
+      "negative_reason": "削除されたhandler内guardと同等のrequireAdminが全handlerより上流のrouter middlewareへ移動している。",
+      "findings": []
+    }
+  ]
+}

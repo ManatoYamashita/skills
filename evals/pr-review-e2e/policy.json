@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "policy_version": "1.0.0",
+  "min_replicates": 3,
+  "require_blind": true,
+  "minimum_truth_support": {
+    "High": 15,
+    "Middle": 21
+  },
+  "absolute_min": {
+    "material_precision": 0.9,
+    "material_recall": 0.85,
+    "high_precision": 0.9,
+    "high_recall": 0.9,
+    "middle_precision": 0.85,
+    "middle_recall": 0.8,
+    "severity_agreement": 0.85,
+    "severity_correct_recall": 0.8,
+    "negative_case_accuracy": 1.0,
+    "case_coverage": 1.0,
+    "case_record_coverage": 1.0
+  },
+  "absolute_max": {
+    "false_positives_per_case": 0.0,
+    "invalid_output_rate": 0.0,
+    "negative_fp_rate": 0.0,
+    "negative_fp_per_pr": 0.0
+  },
+  "max_drop": {
+    "material_precision": 0.02,
+    "material_recall": 0.02,
+    "high_precision": 0.0,
+    "high_recall": 0.0,
+    "middle_precision": 0.03,
+    "middle_recall": 0.03,
+    "severity_agreement": 0.03,
+    "severity_correct_recall": 0.03,
+    "negative_case_accuracy": 0.0,
+    "case_coverage": 0.0
+  },
+  "max_increase": {
+    "false_positives_per_case": 0.0,
+    "invalid_output_rate": 0.0,
+    "negative_fp_rate": 0.0,
+    "negative_fp_per_pr": 0.0
+  },
+  "require_zero_high_miss_runs": true
+}

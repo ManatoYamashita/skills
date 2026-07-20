@@ -1,0 +1,282 @@
+{
+  "blind": true,
+  "cases_digest": "380a50b55513a3b3d77128a647327cb6c2350866682527ef5b8ffb5a29cdf049",
+  "corpus_version": "1.0.0",
+  "counts": {
+    "High": {
+      "fn": 0,
+      "fp": 4,
+      "tp": 15
+    },
+    "Middle": {
+      "fn": 4,
+      "fp": 0,
+      "tp": 17
+    },
+    "attribution_false_positives": 0,
+    "cases_complete": 48,
+    "cases_expected": 48,
+    "cases_returned": 48,
+    "duplicate_false_positives": 0,
+    "material": {
+      "fn": 0,
+      "fp": 0,
+      "tp": 36
+    },
+    "negative_cases": 12,
+    "negative_cases_clean": 12,
+    "negative_false_positives": 0,
+    "semantic_localization_errors": 0,
+    "semantic_matches": 36,
+    "severity_correct": 32,
+    "strict_matches": 36
+  },
+  "diffmap_digest": "e8a59b58aa99dbc4d6a9bcdf1d0f51138b34f626b1104510abf8814d0661bb5e",
+  "macro": {
+    "case_coverage": {
+      "mean": 1.0,
+      "stdev": 0.0,
+      "worst": 1.0
+    },
+    "case_record_coverage": {
+      "mean": 1.0,
+      "stdev": 0.0,
+      "worst": 1.0
+    },
+    "false_positives_per_case": {
+      "mean": 0.0,
+      "stdev": 0.0,
+      "worst": 0.0
+    },
+    "high_f1": {
+      "mean": 0.8838383838383838,
+      "stdev": 0.0357124636962903,
+      "worst": 0.8333333333333333
+    },
+    "high_precision": {
+      "mean": 0.7936507936507936,
+      "stdev": 0.05611958580845616,
+      "worst": 0.7142857142857143
+    },
+    "high_recall": {
+      "mean": 1.0,
+      "stdev": 0.0,
+      "worst": 1.0
+    },
+    "invalid_output_rate": {
+      "mean": 0.0,
+      "stdev": 0.0,
+      "worst": 0.0
+    },
+    "localization_accuracy": {
+      "mean": 1.0,
+      "stdev": 0.0,
+      "worst": 1.0
+    },
+    "material_f1": {
+      "mean": 1.0,
+      "stdev": 0.0,
+      "worst": 1.0
+    },
+    "material_precision": {
+      "mean": 1.0,
+      "stdev": 0.0,
+      "worst": 1.0
+    },
+    "material_recall": {
+      "mean": 1.0,
+      "stdev": 0.0,
+      "worst": 1.0
+    },
+    "middle_f1": {
+      "mean": 0.8931623931623931,
+      "stdev": 0.042305533917143874,
+      "worst": 0.8333333333333333
+    },
+    "middle_precision": {
+      "mean": 1.0,
+      "stdev": 0.0,
+      "worst": 1.0
+    },
+    "middle_recall": {
+      "mean": 0.8095238095238094,
+      "stdev": 0.06734350297014735,
+      "worst": 0.7142857142857143
+    },
+    "negative_case_accuracy": {
+      "mean": 1.0,
+      "stdev": 0.0,
+      "worst": 1.0
+    },
+    "negative_fp_per_pr": {
+      "mean": 0.0,
+      "stdev": 0.0,
+      "worst": 0.0
+    },
+    "negative_fp_rate": {
+      "mean": 0.0,
+      "stdev": 0.0,
+      "worst": 0.0
+    },
+    "severity_agreement": {
+      "mean": 0.8888888888888888,
+      "stdev": 0.03928371006591927,
+      "worst": 0.8333333333333334
+    },
+    "severity_correct_recall": {
+      "mean": 0.8888888888888888,
+      "stdev": 0.03928371006591927,
+      "worst": 0.8333333333333334
+    }
+  },
+  "measurement_id": "observed-20260720-codex-default",
+  "metrics": {
+    "case_coverage": 1.0,
+    "case_record_coverage": 1.0,
+    "false_positives_per_case": 0.0,
+    "high_f1": 0.8823529411764706,
+    "high_precision": 0.7894736842105263,
+    "high_recall": 1.0,
+    "invalid_output_rate": 0.0,
+    "localization_accuracy": 1.0,
+    "material_f1": 1.0,
+    "material_precision": 1.0,
+    "material_recall": 1.0,
+    "middle_f1": 0.8947368421052632,
+    "middle_precision": 1.0,
+    "middle_recall": 0.8095238095238095,
+    "negative_case_accuracy": 1.0,
+    "negative_fp_per_pr": 0.0,
+    "negative_fp_rate": 0.0,
+    "severity_agreement": 0.8888888888888888,
+    "severity_correct_recall": 0.8888888888888888
+  },
+  "miss_rate_by_truth": {
+    "TRUTH-001": {
+      "case_id": "C-7F3A9D2C",
+      "miss_rate": 0.0,
+      "missed_runs": 0,
+      "severity": "High",
+      "severity_mismatch_rate": 0.0,
+      "severity_mismatch_runs": 0
+    },
+    "TRUTH-002": {
+      "case_id": "C-1B8E4A70",
+      "miss_rate": 0.0,
+      "missed_runs": 0,
+      "severity": "High",
+      "severity_mismatch_rate": 0.0,
+      "severity_mismatch_runs": 0
+    },
+    "TRUTH-003": {
+      "case_id": "C-9C2D6F15",
+      "miss_rate": 0.0,
+      "missed_runs": 0,
+      "severity": "High",
+      "severity_mismatch_rate": 0.0,
+      "severity_mismatch_runs": 0
+    },
+    "TRUTH-004": {
+      "case_id": "C-4E7A1B93",
+      "miss_rate": 0.0,
+      "missed_runs": 0,
+      "severity": "High",
+      "severity_mismatch_rate": 0.0,
+      "severity_mismatch_runs": 0
+    },
+    "TRUTH-005": {
+      "case_id": "C-2D5F8C61",
+      "miss_rate": 0.0,
+      "missed_runs": 0,
+      "severity": "High",
+      "severity_mismatch_rate": 0.0,
+      "severity_mismatch_runs": 0
+    },
+    "TRUTH-006": {
+      "case_id": "C-8A1C7E42",
+      "miss_rate": 0.0,
+      "missed_runs": 0,
+      "severity": "Middle",
+      "severity_mismatch_rate": 0.0,
+      "severity_mismatch_runs": 0
+    },
+    "TRUTH-007": {
+      "case_id": "C-5F9B2D74",
+      "miss_rate": 0.0,
+      "missed_runs": 0,
+      "severity": "Middle",
+      "severity_mismatch_rate": 0.0,
+      "severity_mismatch_runs": 0
+    },
+    "TRUTH-008": {
+      "case_id": "C-3C6E1A85",
+      "miss_rate": 0.0,
+      "missed_runs": 0,
+      "severity": "Middle",
+      "severity_mismatch_rate": 0.0,
+      "severity_mismatch_runs": 0
+    },
+    "TRUTH-009": {
+      "case_id": "C-6B2D9F30",
+      "miss_rate": 0.0,
+      "missed_runs": 0,
+      "severity": "Middle",
+      "severity_mismatch_rate": 1.0,
+      "severity_mismatch_runs": 3
+    },
+    "TRUTH-010": {
+      "case_id": "C-1E7C4A96",
+      "miss_rate": 0.0,
+      "missed_runs": 0,
+      "severity": "Middle",
+      "severity_mismatch_rate": 0.0,
+      "severity_mismatch_runs": 0
+    },
+    "TRUTH-011": {
+      "case_id": "C-9A5D3B21",
+      "miss_rate": 0.0,
+      "missed_runs": 0,
+      "severity": "Middle",
+      "severity_mismatch_rate": 0.0,
+      "severity_mismatch_runs": 0
+    },
+    "TRUTH-012": {
+      "case_id": "C-4F8E6C72",
+      "miss_rate": 0.0,
+      "missed_runs": 0,
+      "severity": "Middle",
+      "severity_mismatch_rate": 0.3333333333333333,
+      "severity_mismatch_runs": 1
+    }
+  },
+  "model_digest": "482cd1936a304948dcfafa569b79e46b2e267621b47c015ae2b88b85b98e317f",
+  "prompt_digest": "d51759ed62817f71082f1da754ce0cd27eff411ebf13d7269b4f71df571e6f62",
+  "reviewer": {
+    "model": "default",
+    "name": "codex-default",
+    "reasoning_effort": "default",
+    "version": "codex-cli-0.145.0-alpha.18"
+  },
+  "run_count": 3,
+  "run_ids": [
+    "blind-20260720-r1c",
+    "blind-20260720-r2c",
+    "blind-20260720-r3c"
+  ],
+  "schema_version": 1,
+  "scorer_digest": "7154445e4ee93c551e722bd03e2cabd804a0feb4377692ccbf4f2e2cb2559876",
+  "severity_confusion": {
+    "High": {
+      "High": 15,
+      "Middle": 0
+    },
+    "Middle": {
+      "High": 4,
+      "Middle": 17
+    }
+  },
+  "skill_digest": "d9112283917393ce47550b84c5e053ee1e51df2438c66acf60b0baabc10c447d",
+  "taxonomy_digest": "4d83f1fc32aacaf61e1b9af5e9e548a9855e85ddff9f78744e9ce40835b307dc",
+  "tool_policy_digest": "f915363b409b46e6eb84ce7b74266ae8ac2ae261f5e00aa7a0612572a17605bc",
+  "truth_digest": "c7694d913289e085549b01936c294e079fff99c1adc5fa0b82c85c7c3d878b72"
+}
