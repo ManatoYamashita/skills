@@ -1,0 +1,6 @@
+interface:
+  display_name: "Next.js Best Practices"
+  short_description: "Review Next.js architecture and implementation patterns"
+  default_prompt: "Use $next-best-practices to review this Next.js code for routing, RSC boundaries, async APIs, metadata, and performance patterns."
+policy:
+  allow_implicit_invocation: false

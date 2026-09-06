@@ -1,0 +1,4 @@
+interface:
+  display_name: "Next.js Upgrade"
+  short_description: "Upgrade Next.js with official migration guidance"
+  default_prompt: "Use $next-upgrade to plan and execute an evidence-based upgrade of this Next.js project."
