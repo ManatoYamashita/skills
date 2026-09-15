@@ -13,9 +13,7 @@ Codex向けの自作Skillsと、運用で蓄積した汎用メモリを収録す
 │   ├── frontend-design/            # ブリーフ固有のフロントエンド設計
 │   ├── interface-review/          # 変更スコープのUIレビュー
 │   ├── review2/                    # pr-review-e2e の後継
-│   ├── tabelog-review/
-│   ├── variant/                   # UIバリエーション比較
-│   └── google-maps-review-writing/
+│   └── variant/                   # UIバリエーション比較
 ├── evals/             # Skillのblind評価corpus、oracle、policy
 │   └── pr-review-e2e/              # review2 の評価資産（旧名のまま）
 ├── memories/          # 汎用 feedback メモリ(作業の進め方の教訓)
@@ -56,7 +54,7 @@ GitHub PRをリポジトリ固有のルール、CI、技術スタックへ適応
 
 リポジトリ版は `skills/` に、現在のCodexが自動検出する実行版は `/Users/manatoy_mba/.agents/skills/` に同期している。`explain-interface`、`interface-review`、`break`、`variant` は明示呼び出し専用として登録している。
 
-### 全Skill一覧（2026-09-06）
+### 全Skill一覧（2026-09-16）
 
 ```text
 agent-browser
@@ -87,7 +85,6 @@ google-cloud-recipe-onboarding
 google-cloud-waf-cost-optimization
 google-cloud-waf-reliability
 google-cloud-waf-security
-google-maps-review-writing
 grill-me
 grill-with-docs
 gsap-core
@@ -106,7 +103,6 @@ next-cache-components
 next-upgrade
 review2
 shadcn
-tabelog-review
 variant
 vercel-cli-with-tokens
 vercel-composition-patterns
@@ -118,16 +114,11 @@ web-design-guidelines
 
 同期時は、まず `skills/` を正本としてSkillディレクトリを追加・更新し、各Skillの `SKILL.md` と必要な `agents/openai.yaml`・参照ファイルを `/Users/manatoy_mba/.agents/skills/` へ同一内容で反映する。同期後はSkill数、`SKILL.md` の存在、frontmatter、内部リンク、両ディレクトリの差分を確認する。
 
-### tabelog-review
+### ここに置かないSkill
 
-グルメインフルエンサー風の食べログ(Tabelog)レビュー投稿のタイトルと本文を作成するSkill。
-情報収集で裏付けの取れた事実のみを使い、人間らしいプレーンテキストのレビューを生成する。
-
-### google-maps-review-writing
-
-Googleマップのクチコミ(特に日本語300文字以上)を作成・推敲するSkill。ブラウザでレビュー画面を
-直接操作できる場合、店舗名・評価・入力済みテキストをページから読み取り、公式サイトなど信頼できる
-情報源で裏付けを取ってから下書きを入力する。投稿ボタンはユーザーが明示的に指示しない限り押さない。
+`tabelog-review`・`google-maps-review-writing`・`review-tone-lint` は別の非公開リポジトリで管理する。
+`~/.claude/skills/` にある同名のSkillはそのリポジトリへのシンボリックリンクなので、全Skillを
+同期するときもこのworkspaceへコピーしない。
 
 ## memories/
 
