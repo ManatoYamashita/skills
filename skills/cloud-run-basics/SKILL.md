@@ -1,5 +1,7 @@
 ---
 name: cloud-run-basics
+metadata:
+  category: Serverless
 description: >-
   Manages Cloud Run services, jobs, and worker pools. Use when you need to deploy applications
   responding to HTTP requests (services), run event-triggered or scheduled tasks (jobs),
@@ -27,13 +29,13 @@ types:
 1.  Enable the Cloud Run Admin API and Cloud Build APIs:
 
     ```bash
-    gcloud services enable run.googleapis.com cloudbuild.googleapis.com
+    gcloud services enable run.googleapis.com cloudbuild.googleapis.com --quiet
     ```
 
-1.  If you are under a domain restriction organization policy [restricting](https://docs.cloud.google.com/organization-policy/restrict-domains)
+1.  If you are under a domain restriction organization policy [restricting](https://docs.cloud.google.com/organization-policy/restrict-domains.md.txt)
    unauthenticated invocations for your project, you will need to access your
     deployed service as described under [Testing private
-    services](https://docs.cloud.google.com/run/docs/triggering/https-request#testing-private).
+    services](https://docs.cloud.google.com/run/docs/triggering/https-request.md.txt).
 
 ### Required roles
 
@@ -55,7 +57,8 @@ Cloud Run Builder (`roles/run.builder`) role on your project:
 ```bash
 gcloud projects add-iam-policy-binding PROJECT_ID \
     --member=serviceAccount:SERVICE_ACCOUNT_EMAIL_ADDRESS \
-    --role=roles/run.builder
+    --role=roles/run.builder \
+    --quiet
 ```
 
 Replace `PROJECT_ID` with your Google Cloud project ID and
@@ -81,16 +84,16 @@ Run instance is started.
 ### Supported container images
 
 You can directly use container images stored in the [Artifact
-Registry](https://docs.cloud.google.com/artifact-registry/docs/overview), or
+Registry](https://docs.cloud.google.com/artifact-registry/docs/overview.md.txt), or
 [Docker Hub](https://hub.docker.com/). Google recommends the use of Artifact
 Registry since Docker Hub images are
-[cached](https://docs.cloud.google.com/artifact-registry/docs/pull-cached-dockerhub-images)
+[cached](https://docs.cloud.google.com/artifact-registry/docs/pull-cached-dockerhub-images.md.txt)
 for up to one hour.
 
 You can use container images from other public or private registries (like JFrog
 Artifactory, Nexus, or GitHub Container Registry), by setting up an [Artifact
 Registry remote
-repository](https://docs.cloud.google.com/artifact-registry/docs/repositories/remote-repo).
+repository](https://docs.cloud.google.com/artifact-registry/docs/repositories/remote-repo.md.txt).
 
 You should only consider [Docker Hub](https://hub.docker.com/) for deploying
 popular container images such as [Docker Official
@@ -98,7 +101,7 @@ Images](https://docs.docker.com/docker-hub/official_images/) or [Docker
 Sponsored OSS images](https://docs.docker.com/docker-hub/dsos-program/). For
 higher availability, Google recommends deploying these Docker Hub images using
 an [Artifact Registry remote
-repository](https://docs.cloud.google.com/artifact-registry/docs/repositories/remote-repo).
+repository](https://docs.cloud.google.com/artifact-registry/docs/repositories/remote-repo.md.txt).
 
 To deploy a container image, run the following command:
 
@@ -106,7 +109,8 @@ To deploy a container image, run the following command:
     gcloud run deploy SERVICE_NAME \
         --image IMAGE_URL \
         --region us-central1 \
-        --allow-unauthenticated
+        --allow-unauthenticated \
+        --quiet
 ```
 
 Replace the following:
@@ -139,17 +143,18 @@ There are two different ways to deploy your service from source:
          ```bash
          gcloud run deploy SERVICE_NAME --source . \
          --base-image BASE_IMAGE \
-         --automatic-updates
+         --automatic-updates \
+         --quiet
          ```
 
         Cloud Run only supports automatic base images that use [Google Cloud's
         buildpacks base
-        images](https://docs.cloud.google.com/docs/buildpacks/base-images).
+        images](https://docs.cloud.google.com/docs/buildpacks/base-images.md.txt).
 
         *   To deploy from source using a Dockerfile, run the following command:
 
          ```bash
-          gcloud run deploy SERVICE_NAME --source .
+          gcloud run deploy SERVICE_NAME --source . --quiet
          ```
             When you provide a Dockerfile, Cloud Build runs it in the cloud, and
             deploys the service.
@@ -165,7 +170,8 @@ There are two different ways to deploy your service from source:
      --no-build \
      --base-image=BASE_IMAGE \
      --command=COMMAND \
-     --args=ARG
+     --args=ARG \
+     --quiet
     ```
 
     Replace the following:
@@ -173,7 +179,7 @@ There are two different ways to deploy your service from source:
     *   SERVICE_NAME: the name of your Cloud Run service.
     *   APPLICATION_PATH: the location of your application on the local file
         system.
-    *   BASE_IMAGE: the [runtime base image](https://docs.cloud.google.com/run/docs/configuring/services/runtime-base-images#how_to_obtain_base_images)
+    *   BASE_IMAGE: the [runtime base image](https://docs.cloud.google.com/run/docs/configuring/services/runtime-base-images.md.txt)
     you want to use for your application. For example,
         `us-central1-docker.pkg.dev/serverless-runtimes/google-24-full/runtimes/nodejs24`.
         You can also deploy a pre-compiled binary without configuring additional
@@ -185,20 +191,20 @@ There are two different ways to deploy your service from source:
 
     For examples on deploying from source without build, see [Examples of
         deploying from source without
-        build](https://docs.cloud.google.com/run/docs/deploying-source-code#examples-without-build).
+        build](https://docs.cloud.google.com/run/docs/deploying-source-code.md.txt).
 
 ## Create and execute a Cloud Run job
 
 To create a new job, run the following command:
 
 ```bash
-gcloud run jobs create JOB_NAME --image IMAGE_URL OPTIONS
+gcloud run jobs create JOB_NAME --image IMAGE_URL OPTIONS --quiet
 ```
 
 Alternatively, use the deploy command:
 
 ```bash
-gcloud run jobs deploy JOB_NAME --image IMAGE_URL OPTIONS
+gcloud run jobs deploy JOB_NAME --image IMAGE_URL OPTIONS --quiet
 ```
 
 Replace the following:
@@ -243,14 +249,14 @@ successful completion.
 To execute an existing job, run the following command:
 
 ```bash
-gcloud run jobs execute JOB_NAME
+gcloud run jobs execute JOB_NAME --quiet
 ```
 
 If you want the command to wait until the execution completes, run the following
 command:
 
 ```bash
-gcloud run jobs execute JOB_NAME --wait --region=REGION
+gcloud run jobs execute JOB_NAME --wait --region=REGION --quiet
 ```
 
 Replace the following:
@@ -274,16 +280,16 @@ digest (for example,
 ### Supported container images
 
 You can directly use container images stored in the [Artifact
-Registry](https://docs.cloud.google.com/artifact-registry/docs/overview), or
+Registry](https://docs.cloud.google.com/artifact-registry/docs/overview.md.txt), or
 [Docker Hub](https://hub.docker.com/). Google recommends the use of Artifact
 Registry since Docker Hub images are
-[cached](https://docs.cloud.google.com/artifact-registry/docs/pull-cached-dockerhub-images)
+[cached](https://docs.cloud.google.com/artifact-registry/docs/pull-cached-dockerhub-images.md.txt)
 for up to one hour.
 
 You can use container images from other public or private registries (like JFrog
 Artifactory, Nexus, or GitHub Container Registry), by setting up an [Artifact
 Registry remote
-repository](https://docs.cloud.google.com/artifact-registry/docs/repositories/remote-repo).
+repository](https://docs.cloud.google.com/artifact-registry/docs/repositories/remote-repo.md.txt).
 
 You should only consider [Docker Hub](https://hub.docker.com/) for deploying
 popular container images such as [Docker Official
@@ -291,12 +297,12 @@ Images](https://docs.docker.com/docker-hub/official_images/) or [Docker
 Sponsored OSS images](https://docs.docker.com/docker-hub/dsos-program/). For
 higher availability, Google recommends deploying these Docker Hub images using
 an [Artifact Registry remote
-repository](https://docs.cloud.google.com/artifact-registry/docs/repositories/remote-repo).
+repository](https://docs.cloud.google.com/artifact-registry/docs/repositories/remote-repo.md.txt).
 
 To deploy a container image, run the following command:
 
 ```bash
-gcloud run worker-pools deploy WORKER_POOL_NAME --image IMAGE_URL
+gcloud run worker-pools deploy WORKER_POOL_NAME --image IMAGE_URL --quiet
 ```
 
 Replace the following:
@@ -325,7 +331,7 @@ The deploy command defaults to source deployment if you don't supply the
 `--image` or `--source` flags.
 
 Behind the scenes, this command uses [Google Cloud's
-buildpacks](https://docs.cloud.google.com/docs/buildpacks/overview) and Cloud
+buildpacks](https://docs.cloud.google.com/docs/buildpacks/overview.md.txt) and Cloud
 Build to automatically build container images from your source code without
 having to install Docker on your machine or set up buildpacks or Cloud Build. By
 default, Cloud Run uses the default machine type provided by Cloud Build.
@@ -333,7 +339,7 @@ default, Cloud Run uses the default machine type provided by Cloud Build.
 To deploy a worker pool from source, run the following command:
 
 ```bash
-gcloud run worker-pools deploy WORKER_POOL_NAME --source .
+gcloud run worker-pools deploy WORKER_POOL_NAME --source . --quiet
 ```
 
 Replace `WORKER_POOL_NAME` with the name you want for your worker pool.
@@ -367,6 +373,10 @@ Replace `WORKER_POOL_NAME` with the name you want for your worker pool.
 
 -   [IAM & Security](references/iam-security.md): Roles, service identities,
     and ingress/egress controls.
+
+-   [Networking Best Practices & Cost Optimization](references/networking.md): Cost
+    optimization strategies, Direct VPC egress, IP address and port exhaustion
+    strategies, performance throughput tuning, and MTU settings.
 
 *If you need product information not found in these references, use the
     Developer Knowledge MCP server `search_documents` tool.*
