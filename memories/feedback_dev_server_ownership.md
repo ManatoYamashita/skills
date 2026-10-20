@@ -34,7 +34,7 @@ originSessionId: df59d2a9-a6a2-46d1-907e-46702eb59210
 - 例外なし。「ちょっとだけ」「すぐ戻す」も禁止。最後に install したプラットフォーム側しか動かないため、片方を壊す行為そのもの
 
 **検出指標 (devcontainer 側 dev server が壊れたサイン):**
-- Claude in Chrome の navigate で `ERR_EMPTY_RESPONSE` / `body: "This page isn't working"`
+- ブラウザ自動操作(Aside)の navigate で `ERR_EMPTY_RESPONSE` / `body: "This page isn't working"`
 - Next.js Build Error 画面で `Cannot find module '../lightningcss.linux-arm64-gnu.node'` 等の linux binding 不在エラー
 - これらが出たら、わたくしが直前に Ghostty で `pnpm install` を走らせてしまった可能性が高い。即座にユーザーに devcontainer 側 install を依頼する
 

@@ -54,10 +54,9 @@ GitHub PRをリポジトリ固有のルール、CI、技術スタックへ適応
 
 リポジトリ版は `skills/` に、現在のCodexが自動検出する実行版は `/Users/manatoy_mba/.agents/skills/` に同期している。`explain-interface`、`interface-review`、`break`、`variant` は明示呼び出し専用として登録している。
 
-### 全Skill一覧（2026-10-20・56本）
+### 全Skill一覧（2026-10-20・55本）
 
 ```text
-agent-browser
 ai-elements
 alloydb-basics
 aside-browser

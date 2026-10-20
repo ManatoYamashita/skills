@@ -2,7 +2,7 @@
 
 Search by property signature, not by guessing the element. You rarely know the markup, but you always know which CSS properties could produce what you are looking at.
 
-Run these through whatever browser tooling is available: `evaluate_script` in the Chrome DevTools MCP, the console, a Playwright `page.evaluate`.
+Run these through whatever browser tooling is available: `aside repl`, the console, a Playwright `page.evaluate`.
 
 ## Three things that cost you the answer
 
