@@ -54,12 +54,13 @@ GitHub PRをリポジトリ固有のルール、CI、技術スタックへ適応
 
 リポジトリ版は `skills/` に、現在のCodexが自動検出する実行版は `/Users/manatoy_mba/.agents/skills/` に同期している。`explain-interface`、`interface-review`、`break`、`variant` は明示呼び出し専用として登録している。
 
-### 全Skill一覧（2026-09-16）
+### 全Skill一覧（2026-10-20・56本）
 
 ```text
 agent-browser
 ai-elements
 alloydb-basics
+aside-browser
 better-accessibility
 better-colors
 better-interface
@@ -79,8 +80,8 @@ firebase-basics
 frontend-design
 gemini-api
 gke-basics
+google-cloud-networking-observability
 google-cloud-recipe-auth
-google-cloud-recipe-networking-observability
 google-cloud-recipe-onboarding
 google-cloud-waf-cost-optimization
 google-cloud-waf-reliability
@@ -98,9 +99,11 @@ gsap-utils
 interface-review
 migrate-radix-to-base
 modern-web-guidance
-next-best-practices
-next-cache-components
-next-upgrade
+next-cache-components-adoption
+next-cache-components-optimizer
+next-dev-loop
+next-partial-prefetching-adoption
+next-partial-prefetching-optimizer
 review2
 shadcn
 variant
@@ -112,11 +115,29 @@ vercel-react-view-transitions
 web-design-guidelines
 ```
 
-同期時は、まず `skills/` を正本としてSkillディレクトリを追加・更新し、各Skillの `SKILL.md` と必要な `agents/openai.yaml`・参照ファイルを `/Users/manatoy_mba/.agents/skills/` へ同一内容で反映する。同期後はSkill数、`SKILL.md` の存在、frontmatter、内部リンク、両ディレクトリの差分を確認する。
+### 同期ルール
+
+`~/.agents/skills/`（実行版）は `npx skills` が管理しており、`~/.agents/.skill-lock.json` に上流リポジトリと更新日時が残る。上流が更新されるたびに実行版が先へ進むため、正本の向きをSkillの出自で分ける。
+
+| 出自 | 正とする側 | 例 |
+| ---- | ---------- | -- |
+| 上流由来（lock管理） | 実行版 → `skills/` へ取り込む | `google/skills`、`vercel/next.js`、`shadcn/ui` など |
+| 自作・独自編集 | `skills/` → 実行版へ反映する | `review2` |
+| 実行版にのみある独自Skill | 実行版 → `skills/` へ取り込む | `aside-browser` |
+
+取り込み時の手順:
+
+1. `rsync -a --delete --exclude .DS_Store --exclude __pycache__ ~/.agents/skills/<name>/ skills/<name>/` で取り込む。symlink は対象外（下記）。上流で改名・削除されたSkillは `skills/` からも削除する。
+2. frontmatter は `name`・`description`・`license`・`allowed-tools`・`metadata` のみとする。`hidden`・`disable-model-invocation` は削除し、明示呼び出し専用は `agents/openai.yaml` の `policy.allow_implicit_invocation: false` で表す。`version` は `metadata.version` へ移す。
+3. 同期後はSkill数、`SKILL.md` の存在、frontmatter、内部リンク、READMEの一覧と実ディレクトリの一致を確認する。
+
+実行版へ反映する自作Skill（`review2`）は `skills/review2/` を同一内容でコピーする。同期は上流更新（`npx skills update`）の後と、自作Skillを編集した後に行う。
+
+既知の例外: `bigquery-basics` の `../bigquery-ai-ml` は上流の別Skillへのリンクで、未導入のため解決しない。
 
 ### ここに置かないSkill
 
-`tabelog-review`・`google-maps-review-writing`・`review-tone-lint` は別の非公開リポジトリで管理する。
+`tabelog-review`・`google-maps-review-writing`・`review-tone-lint`・`tabelog-follow`・`tabelog-post` は別の非公開リポジトリで管理する。
 `~/.claude/skills/` にある同名のSkillはそのリポジトリへのシンボリックリンクなので、全Skillを
 同期するときもこのworkspaceへコピーしない。
 
