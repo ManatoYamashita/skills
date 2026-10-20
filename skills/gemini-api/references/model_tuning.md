@@ -1,6 +1,8 @@
 # Model Tuning
 
-Supervised Fine-Tuning or Preference Tuning using your own datasets.
+Supervised Fine-Tuning using your own datasets.
+
+Note: Not all models support tuning. Refer to https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/tuning/supervised-tuning.md.txt for the list of supported models.
 
 ```python
 import time
@@ -14,7 +16,7 @@ training_dataset = types.TuningDataset(
 )
 
 tuning_job = client.tunings.tune(
-    base_model="gemini-3-flash-preview",
+    base_model="gemini-3.1-flash-lite",
     training_dataset=training_dataset,
     config=types.CreateTuningJobConfig(
         tuned_model_display_name="Example tuning job",
