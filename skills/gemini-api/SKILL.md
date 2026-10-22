@@ -1,14 +1,14 @@
 ---
 name: gemini-api
 metadata:
+  version: "1.0.0"
   category: AiAndMachineLearning
 description: Use when the user asks about using Gemini in an enterprise environment or explicitly mentions Vertex AI, Google Cloud, or Agent Platform. Guides the usage of the Gemini API on Agent Platform with the Google Gen AI SDK. Covers SDK usage (Python, JS/TS, Go, Java, C#), capabilities like multimodal inputs, tools, media generation, caching, batch prediction, and Live API.
+compatibility: Requires active Google Cloud credentials and Agent Platform API enabled.
 ---
 
 > [!IMPORTANT]
 > Agent Platform (full name Gemini Enterprise Agent Platform) was previously named "Vertex AI" and many web resources use the legacy branding.
-
-This skill requires active Google Cloud credentials and the Agent Platform API to be enabled.
 
 # Gemini API in Agent Platform
 
