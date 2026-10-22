@@ -2,7 +2,7 @@
 
 Use this where no specific effect was named and the question is how the interface is built in general. For one named thing, use [find-the-effect.md](find-the-effect.md).
 
-Every snippet runs in the page context, through whatever browser tooling is available: `evaluate_script` in the Chrome DevTools MCP, the console, a Playwright `page.evaluate`. Each returns data rather than printing, so the result comes back whole.
+Every snippet runs in the page context, through whatever browser tooling is available: `aside repl`, the console, a Playwright `page.evaluate`. Each returns data rather than printing, so the result comes back whole.
 
 Run them in this order. Tokens first, because a page that hands you its custom properties has already told you most of the answer.
 

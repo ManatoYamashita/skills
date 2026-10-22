@@ -33,16 +33,16 @@ How you reach the page decides what you may claim. Say which route you used.
 
 Neither is a downgrade. A browser at one viewport misses the `md:` variants raw HTML hands over, and raw CSS cannot say which of nine matching rules won. Use both where the question is worth it.
 
-Use any browser tooling available in the current Codex environment. A Chrome DevTools MCP or browser automation session is useful when you need computed styles, paint order, pseudo-elements, live animations, network requests, or screenshots:
+Use any browser tooling available in the current Codex environment. An `aside repl` session (run `aside guide repl` first) is useful when you need computed styles, paint order, pseudo-elements, live animations, network requests, or screenshots:
 
-It gives you `evaluate_script` for the recipes here, `resize_page` and `take_screenshot` for another width, `list_network_requests` for what is served and `performance_start_trace` for a stutter. Prefer it over the fetch method when:
+It runs the recipes here as page JavaScript, resizes the viewport and takes screenshots for another width, and lists the network requests for what is served. Prefer it over the fetch method when:
 
 - The effect is a `canvas` or a shader.
 - Styles arrive at runtime, through CSS-in-JS or a theme script.
 - Several rules match and you need the one that won.
 - The answer depends on motion.
 
-Whatever browser you drive, never kill one you did not start. A `pkill` pattern broad enough to match `chrome` takes down the MCP's own browser and every session attached to it. Quit the process you launched, by its pid.
+Whatever browser you drive, never kill one you did not start. A `pkill` pattern broad enough to match `chrome` takes down the user's Aside browser and every session attached to it. Quit the process you launched, by its pid.
 
 Without a browser, [no-browser.md](no-browser.md) holds the fetch method.
 
