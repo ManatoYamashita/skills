@@ -134,6 +134,30 @@ web-design-guidelines
 
 既知の例外: `bigquery-basics` の `../bigquery-ai-ml` は上流の別Skillへのリンクで、未導入のため解決しない。
 
+### 改変済みの上流Skill（update後に再適用が必要）
+
+上流由来のSkillのうち、ブラウザ操作手段を Aside に統一するため独自に書き換えたもの。
+`npx skills update` は実行版 `~/.agents/skills/` を上流の内容で上書きするため、update のたびに再適用する。
+
+| Skill | 改変内容 |
+| ----- | -------- |
+| `next-dev-loop` | `agent-browser` の session / restore 手順を削除し、`aside guide` / `aside repl` 前提へ |
+| `next-cache-components-adoption`（`references/dev-only-validations.md` 含む） | `agent-browser` を `aside repl` へ置換 |
+| `next-partial-prefetching-adoption` | `agent-browser` を `aside repl` へ置換 |
+| `explain-interface` | `chrome-devtools-mcp` の記述を `aside repl` へ置換 |
+| `modern-web-guidance`（`guides/accessibility/accessibility.md`） | 「Chrome DevTools MCP」を `aside repl` へ置換 |
+
+update 後の手順:
+
+1. 次のコマンドで残存を検出する。1件でも出たら再適用が必要。
+
+   ```bash
+   grep -rlE 'agent-browser|Claude in Chrome|Chrome DevTools MCP|chrome-devtools-mcp' ~/.agents/skills
+   ```
+
+2. 実行版を直接書き換える。上流が同じ箇所を変更していると `patch` が通らないため、上流の新しい文脈を読んで手で当て直す。実行版を `skills/` で丸ごと上書きしない（上流の更新が消える）。
+3. 実行版から `skills/` へ取り込み（上の手順）、同じ grep が `skills/`・`memories/`・`README.md` でも 0 件であることを確認する。
+
 ### ここに置かないSkill
 
 `tabelog-review`・`google-maps-review-writing`・`review-tone-lint`・`tabelog-follow`・`tabelog-post` は別の非公開リポジトリで管理する。
