@@ -1,8 +1,7 @@
 ---
 name: aside-browser
+version: 3
 description: Read when you need a browser, or have to work across user's logged-in websites (e.g. Gmail, Slack, cloud consoles, etc.), or have to refer personal contexts like memory and browsing history.
-metadata:
-  version: "3"
 ---
 
 # Aside
